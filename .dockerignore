@@ -1,0 +1,6 @@
+.git
+.idea
+storage/framework/cache/**
+storage/framework/sessions/**
+storage/framework/views/**
+tenancy.json

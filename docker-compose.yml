@@ -1,0 +1,34 @@
+version: '2.0'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: laravel-docker
+    ports:
+      - 80:80
+    volumes:
+      - .:/srv/app
+    links:
+      - mysql
+      - redis
+    environment:
+      DB_HOST: mysql
+      DB_DATABASE: classypos_saas
+      DB_USERNAME: root
+      DB_PASSWORD: q1w2e3r4t5!
+      REDIS_HOST: redis
+      SESSION_DRIVER: redis
+      CACHE_DRIVER: redis
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 13306:3306
+    environment:
+      MYSQL_DATABASE: classypos_saas
+      MYSQL_ROOT_PASSWORD: q1w2e3r4t5!
+  redis:
+    image: redis:4.0-alpine
+    ports:
+      - 16379:6379
